@@ -111,8 +111,10 @@ function patchDeviceReading(req, res, next) {
         res.send(400);
     }
     try {
-        const timeout = Math.floor(Math.random() * 5000);
-        const failRate = Math.floor(Math.random() * 100);
+        // const timeout = Math.floor(Math.random() * 5000);
+        // const failRate = Math.floor(Math.random() * 100);
+        const timeout = 0;
+        const failRate = 0;
         if (failRate > 60) {
             res.send(400, 'device state patch failed');
             return null;
