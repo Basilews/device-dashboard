@@ -1,15 +1,26 @@
 import React from 'react';
 
+import styles from './style.css';
+
+
 function ReadingItem({ readings, switchStatus }) {
   return (
-    <li>
+    <li className={styles.readingListItem}>
       {Object.keys(readings).map(reading => (
         <p key={`${readings.name}-${reading}`}>
-          {reading}: {readings[reading].toString()}
+          <span className={styles.reading}>{reading}:</span>&nbsp;
+          {reading === 'active'
+            ? (
+              <span className={styles[readings[reading] ? 'isActive' : 'isUnActive']}>
+                {readings[reading].toString()}
+              </span>
+            )
+            : readings[reading].toString()
+          }
         </p>
       ))}
       <button
-        className="statusSwitch"
+        className={styles.statusSwitch}
         onClick={(e) => switchStatus(e, readings.name, readings.active)}
         disabled={readings.active ? false : false}>
         {readings.active ? 'Turn off' : 'Turn on'}
@@ -20,7 +31,7 @@ function ReadingItem({ readings, switchStatus }) {
 
 function ReadingList(props) {
   return (
-    <ul>
+    <ul className={styles.readingList}>
       {props.readingList.map(readings => (
         <ReadingItem key={readings.name} readings={readings} {...props} />
       ))}

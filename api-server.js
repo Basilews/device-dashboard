@@ -101,8 +101,7 @@ const deviceReadings = [
 ];
 
 function getDeviceReading(req, res , next){
-    // const timeout = 1700;
-    const timeout = 0;
+    const timeout = 1700;
     setTimeout(() => { res.send(200, { data: deviceReadings }) }, timeout);
 }
 

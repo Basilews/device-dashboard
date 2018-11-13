@@ -1,0 +1,58 @@
+:local(.title) {
+  max-width: 288px;
+  margin: 0 auto 16px;
+  padding: 10px;
+  font-size: 26px;
+  text-align: center;
+  background: black;
+}
+
+:local(.statusBar) {
+  max-width: 288px;
+  background: black;
+  padding: 16px;
+}
+
+:local(.status + .status) {
+  margin-left: 16px;
+}
+
+:local(.searchForm) {
+  display: flex;
+  flex-direction: column;
+  max-width: 288px;
+  margin-top: 8px;
+  padding: 16px;
+  background: black;
+}
+
+:local(.searchInput) {
+  max-width: 200px;
+  margin-top: 8px;
+  padding-left: 4px;
+  font-size: 16px;
+}
+
+:local(.messageBox) {
+  max-width: 288px;
+  margin-top: 8px;
+  padding: 16px;
+  background: black;
+}
+
+:local(.hasActiveReadings) {
+  text-decoration: line-through;
+}
+
+:local(.isConnecting) {
+  position: aboslute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  max-width: 288px;
+  margin: 96px auto 0;
+  padding: 16px;
+  text-align: center;
+  background: black;
+}

@@ -1,0 +1,29 @@
+:local(.readingList) {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+:local(.readingListItem) {
+  width: 288px;
+  margin: 0 16px 16px 0;
+  padding: 16px;
+  background: black;
+}
+
+:local(.reading) {
+  color: yellow;
+}
+
+:local(.isActive) {
+  color: green;
+}
+
+:local(.isUnActive) {
+  color: red;
+}
+
+:local(.statusSwitch) {
+  padding: 4px 8px;
+  font-size: 14px;
+  font-weight: bold;
+}

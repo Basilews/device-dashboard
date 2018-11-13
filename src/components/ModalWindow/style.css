@@ -1,0 +1,39 @@
+:local(.modal) {
+  position: fixed;
+  top: 40px;
+  left: 0;
+  right: 0;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 8px 16px;
+  text-align: center;
+  background: black;
+  border: 1px solid rgba(255, 255, 255, .3);
+  animation: slide-in .4s ease;
+  transition: opacity .4s;
+}
+
+:local(.modal.isHidden) {
+  opacity: 0;
+  animation: slide-out .4s ease;
+}
+
+@keyframes slide-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-60px);
+  }
+}

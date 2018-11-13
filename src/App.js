@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import classNames from 'classnames';
 
-import ModalWindow from './components/ModalWindow';
-import ReadingList from './components/ReadingList';
-
+import ModalWindow from './components/ModalWindow/index.js';
+import ReadingList from './components/ReadingList/index.js';
+import styles from './style.css';
 
 class App extends Component {
   constructor(props) {
@@ -100,34 +100,45 @@ class App extends Component {
 
     return (
       <Fragment>
-        {error && (
-          <ModalWindow>
-            <div>👨‍🔧 Something went wrong. Try again or report an error</div>
-          </ModalWindow>
-        )}
-        <div className="readingList">
-          <div className="statusBar">
-            <span className="status">
+        <h1 className={styles.title}>Device Dashboard</h1>
+        <div>
+          <div className={styles.statusBar}>
+            <span className={styles.status}>
               Active: {activeReadingsCount}
             </span>
-            <span className={classNames('status', { isDisabled: activeReadings })}>
-              Unactive: {unActiveReadingsCount}
+            <span className={classNames(styles.status, { isDisabled: activeReadings })}>
+              <span className={activeReadings ? styles.hasActiveReadings : ''}>
+                Unactive: {unActiveReadingsCount}</span>
             </span>
           </div>
-          <div>
+          <div className={styles.searchForm}>
             <label htmlFor="status-search">Search active readings</label>
             <input
+              className={styles.searchInput}
               type="text" role="search" name="status-search"
               onInput={e => this.searchActiveReadings(e)} />
           </div>
-          {!readingList && <p>Connecting to device...</p>}
-          {readingList && readingList.length && (
+          {!readingList && (
+            <div className={styles.isConnecting}>
+              <span>Connecting to device...</span>
+            </div>
+          )}
+          {readingList && !!readingList.length && (
             <ReadingList
               readingList={readingList}
               switchStatus={this.switchStatus} />
           )}
-          {readingList && !readingList.length && <p>No device has been found...</p>}
+          {readingList && !readingList.length && (
+            <div className={styles.messageBox}>
+              <p>No device has been found...</p>
+            </div>
+          )}
         </div>
+        {error && (
+          <ModalWindow>
+            <span>👨‍🔧 Something went wrong. Try again or report an error</span>
+          </ModalWindow>
+        )}
       </Fragment>
     );
   }
