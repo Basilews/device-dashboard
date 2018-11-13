@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import classNames from 'classnames';
 
 import ModalWindow from './components/ModalWindow';
+import ReadingList from './components/ReadingList';
 
 
 class App extends Component {
@@ -15,6 +16,8 @@ class App extends Component {
       unActiveReadingsCount: 0,
       error: false,
     }
+
+    this.switchStatus = this.switchStatus.bind(this);
   }
 
   componentDidMount() {
@@ -47,6 +50,7 @@ class App extends Component {
 
   async switchStatus(e, name, status) {
     const { target } = e;
+    const buttonText = target.innerHTML;
     target.innerHTML = 'Loading...';
     target.disabled = true;
 
@@ -57,6 +61,7 @@ class App extends Component {
         if (response.status >= 400 && response.status < 600) {
           console.warn('failed to patch new status');
           this.setState({ error: true });
+          target.innerHTML = buttonText;
         }
         else {
           this.setState({ error: false });
@@ -117,23 +122,9 @@ class App extends Component {
           </div>
           {!readingList && <p>Connecting to device...</p>}
           {readingList && readingList.length && (
-            <ul>
-              {readingList.map(readings => (
-                <li key={readings.name}>
-                  {Object.keys(readings).map(reading => (
-                    <p key={`${readings.name}-${reading}`}>
-                      {reading}: {readings[reading].toString()}
-                    </p>
-                  ))}
-                  <button
-                    className="statusSwitch"
-                    onClick={(e) => this.switchStatus(e, readings.name, readings.active)}
-                    disabled={readings.active ? false : false}>
-                    {readings.active ? 'Turn off' : 'Turn on'}
-                  </button>
-                </li>
-              ))}
-            </ul>
+            <ReadingList
+              readingList={readingList}
+              switchStatus={this.switchStatus} />
           )}
           {readingList && !readingList.length && <p>No device has been found...</p>}
         </div>
